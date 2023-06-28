@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'timer3.dart';
-// ignore: unused_import
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 
 class FormScreen extends StatefulWidget {
   @override
@@ -39,7 +37,7 @@ class _FormScreenState extends State<FormScreen> {
             return 'Please enter a valid work duration';
           }
           int work = int.parse(value);
-          if (work == null || work <= 0) {
+          if (work <= 0) {
             return 'Work must be a positive number';
           }
 
@@ -50,7 +48,7 @@ class _FormScreenState extends State<FormScreen> {
           if (work == 69 || work == 420) {
             return 'Nice ;-)';
           }
-          return null;
+          return '';
         },
         onSaved: (value) {
           _work = value!;
@@ -79,7 +77,7 @@ class _FormScreenState extends State<FormScreen> {
             return 'Please enter a valid rest duration';
           }
           int rest = int.parse(value);
-          if (rest == null || rest <= 0) {
+          if (rest <= 0) {
             return 'Rest must be a positive number';
           }
           if (rest < 5) {
@@ -88,7 +86,7 @@ class _FormScreenState extends State<FormScreen> {
           if (rest == 69 || rest == 420) {
             return 'Nice ;-)';
           }
-          return null;
+          return '';
         },
         onSaved: (value) {
           _rest = value!;
@@ -117,13 +115,13 @@ class _FormScreenState extends State<FormScreen> {
             return 'Please enter a valid number of rounds';
           }
           int rounds = int.parse(value);
-          if (rounds == null || rounds <= 0) {
+          if (rounds <= 0) {
             return 'Rounds must be a positive number';
           }
           if (rounds == 69 || rounds == 420) {
             return 'Nice ;-)';
           }
-          return null;
+          return '';
         },
         onSaved: (value) {
           _rounds = value!;

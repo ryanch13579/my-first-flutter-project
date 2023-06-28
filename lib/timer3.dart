@@ -33,7 +33,6 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
   void initState() {
     super.initState();
     totalRounds = int.parse(widget.sessionTime);
-    _isBreak = false;
     currentDuration = int.parse(widget.workTime);
   }
 
@@ -59,6 +58,8 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
       _isRunning = true;
     });
 
+    speak('Work Start');
+
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         if (!_isPaused) {
@@ -72,7 +73,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
               if (completedRounds == totalRounds) {
                 stopTimer();
                 speak('Work Done');
-                navigateToNextPage();
+                navigateToNextPage(context);
                 return;
               }
             } else {
@@ -133,7 +134,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
   String formatDuration(int duration) {
     int minutes = duration ~/ 60;
     int seconds = duration % 60;
-    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+    return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 
   double calculateProgress() {
@@ -141,7 +142,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
     return currentDuration / work;
   }
 
-  void navigateToNextPage() {
+  void navigateToNextPage(BuildContext context) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => MyApp()),
@@ -176,9 +177,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              resetTimer();
-            },
+            onPressed: resetTimer,
             icon: const Icon(
               Icons.restart_alt,
               color: Colors.black,
